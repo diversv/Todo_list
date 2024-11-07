@@ -1,8 +1,5 @@
 REACT Todo list Project
-
-![image](https://github.com/user-attachments/assets/225516e2-51d9-4ca5-8bdf-aa18e6105892)
-
-
+![image](https://github.com/user-attachments/assets/d408a574-f426-4410-8020-a653587f0a28)
 
 # To_do_list
 Todo app built with React using REST API 
