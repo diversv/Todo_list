@@ -17,22 +17,22 @@ const TodoList = ({ list, toggleTodo, remove, editTodo }) => {
               className="checkbox"
               type="checkbox"
               checked={item.isChecked}
-              onChange={() => toggleTodo(item.id)}
+              onChange={() => toggleTodo(item.id, item.userId)}
             />
-             <span className={item.isChecked ? "todo-checked" : ""}>
-                {item.text || "(Unnamed Todo)"} {/* Fallback for missing text */}
+            <span className={item.isChecked ? "todo-checked" : ""}>
+              {item.text || "(Unnamed Todo)"} {/* Fallback for missing text */}
             </span>
           </div>
           <div className="todo-actions">
             <button
               className="edit-button"
-              onClick={() => editTodo(item.id, item.text)}
+              onClick={() => editTodo(item.id, item.text, item.userId)}
             >
               <FontAwesomeIcon icon={faEdit} size="lg" />
             </button>
             <button
               className="delete-button"
-              onClick={() => remove(item.id)} // Pass item.id explicitly
+              onClick={() => remove(item.id, item.userId)} // Pass userId explicitly
             >
               <FontAwesomeIcon icon={faTrash} size="lg" />
             </button>

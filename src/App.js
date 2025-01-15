@@ -5,6 +5,7 @@ import TodoList from './TodoList';
 import Clock from './CurrentImage';
 import AuthForm from './AuthForm';
 import axios from 'axios';
+import { useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from "react-router-dom";
 
 const App = () => {
@@ -109,7 +110,7 @@ useEffect(() => {
   }
 }, [isLoggedIn]);
 
-const addTodo = async () => {
+const addTodo = useCallback(async () => {
   if (!todo.trim()) {
     alert("Todo cannot be empty.");
     return;
@@ -117,15 +118,15 @@ const addTodo = async () => {
   try {
     const newTodo = { id: Date.now(), text: todo.trim(), isChecked: false };
     const response = await axios.post(`${API_URL}/todos`, newTodo);
-    const addedTodo = JSON.parse(response.data.body).item; // Parse the response body
+    const addedTodo = JSON.parse(response.data.body).item;
     setTodos((prevTodos) => [...prevTodos, addedTodo]);
-    setTodo(""); // Clear input after adding
+    setTodo(""); // Clear the input field
     console.log("Added todo:", addedTodo);
   } catch (error) {
     console.error("Error adding todo:", error);
     alert("Failed to add todo. Please try again.");
   }
-};
+}, [todo, API_URL]); // Dependencies ensure it doesn’t re-create unnecessarily
 
 
 // Start editing a Todo
@@ -140,7 +141,7 @@ const editTodo = (id, text) => {
   setTodo(text); // Populate the input with the current todo text
 };
 
-const updateTodo = async (id, text, isChecked = false) => {
+const updateTodo = useCallback(async (id, text, isChecked = false) => {
   try {
     if (!id || typeof text === "undefined") {
       console.error("Invalid payload for update:", { id, text, isChecked });
@@ -208,7 +209,7 @@ const updateTodo = async (id, text, isChecked = false) => {
       alert("Failed to update todo. Please check your network connection.");
     }
   }
-};
+},[API_URL, todos]); ;
 
 // Delete a todo
 const deleteTodo = async (id) => {
@@ -296,6 +297,7 @@ const PrivateRoute = ({ isLoggedIn, children }) => {
                   deleteTodo={deleteTodo}
                   toggleTodo={toggleTodo}
                   editTodo={editTodo}
+                  setEditTodoId={setEditTodoId} // Pass this prop
                 />
               </PrivateRoute>
             }
@@ -331,6 +333,7 @@ const MainApp = ({
   deleteTodo,
   toggleTodo,
   editTodo,
+  setEditTodoId
 }) => {
   return (
     <div>
@@ -341,6 +344,7 @@ const MainApp = ({
         addTodo={addTodo}
         editTodoId={editTodoId}
         updateTodo={updateTodo}
+        setEditTodoId={setEditTodoId} // Pass this prop
       />
       <TodoList
         list={todos}
