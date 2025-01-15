@@ -6,6 +6,7 @@ import Clock from './CurrentImage';
 import AuthForm from './AuthForm';
 import axios from 'axios';
 import { useCallback } from 'react';
+import WelcomeMessage from './WelcomeMessage';
 import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from "react-router-dom";
 
 const App = () => {
@@ -283,6 +284,7 @@ const PrivateRoute = ({ isLoggedIn, children }) => {
               />
             }
           />
+          <Route path="/help" element={<WelcomeMessage />} />
           <Route
             path="/main"
             element={

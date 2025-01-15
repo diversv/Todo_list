@@ -235,20 +235,20 @@ li:checked {
   color:#eed9b9;
   font-family: 'Open Sans',sans-serif;
 }
-.Auth-form-title {
+/*.Auth-form-title {
   text-align: center;
   margin-bottom: 1em;
-  font-size: 24px;
+  font-size: 20px;
   color: #171b2e;
-  font-weight: 200;
-  font-weight: 800;
+
+  font-weight: 700;
   font-family: 'Open Sans',sans-serif;
 
-}
+}*/
 
 label {
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 700;
   color: #171b2e;
   font-family: " Roboto", serif;
 
@@ -327,9 +327,10 @@ label {
 
 .auth-form-title {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   font-family: 'Open Sans',sans-serif;
-  color:#333852;
+  color:#d1d9e2;
   font-weight: bold;
   font-size:xx-large;
 
@@ -455,4 +456,24 @@ input {
 .todo-checked {
   text-decoration: line-through;
   color: #888;
+}
+.welcome-message {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  margin: 10px auto;
+  max-width: 600px;
+  text-align: center;
+}
+
+.welcome-message h2 {
+  color: #333;
+}
+
+.welcome-message p {
+  color: #555;
+}
+.cursive {
+  font-style: italic;
 }

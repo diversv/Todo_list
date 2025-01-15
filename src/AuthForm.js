@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import WelcomeMessage from "./WelcomeMessage";
+
 import axios from "axios";
 
 const AuthForm = ({ onLogin }) => {
@@ -8,6 +10,7 @@ const AuthForm = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [showBanner, setShowBanner] = useState(true); 
 
   // Toggle between login and signup modes
   const toggleAuthMode = () => {
@@ -37,61 +40,69 @@ const AuthForm = ({ onLogin }) => {
     }
   };
   return (
-    <div className="auth-form-container">
-      <form className="auth-form" onSubmit={handleSubmit}>
-        <h3 className="auth-form-title">{isLogin ? "Login" : "Sign Up"}</h3>
+    <div>
+      {showBanner && (
+        <div>
+          <WelcomeMessage />  
+          <button onClick={() => setShowBanner(false)}>Dismiss </button>
+        </div>
+      )}
+        <div className="auth-form-container">
+        <form className="auth-form" onSubmit={handleSubmit}>
+            <h3 className="auth-form-title">{isLogin ? "Login" : "Sign Up"}</h3>
 
-        {/* Username field for signup */}
-        {!isLogin && (
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
+            {/* Username field for signup */}
+            {!isLogin && (
+            <div className="form-group">
+                <label htmlFor="username">Username</label>
+                <input
+                type="text"
+                id="username"
+                className="form-control"
+                placeholder="Enter your username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                />
+            </div>
+            )}
+
+            <div className="form-group">
+            <label htmlFor="email">Email</label>
             <input
-              type="text"
-              id="username"
-              className="form-control"
-              placeholder="Enter your username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+                type="email"
+                id="email"
+                className="form-control"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
             />
-          </div>
-        )}
+            </div>
+            <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                className="form-control"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+            />
+            </div>
+            <button type="submit" className="btn-submit">
+            {isLogin ? "Login" : "Sign Up"}
+            </button>
 
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            className="form-control"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            {/* Toggle link */}
+            <p className="toggle-auth">
+            {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
+            <span onClick={toggleAuthMode} className="toggle-link">
+                {isLogin ? "Sign Up" : "Login"}
+            </span>
+            </p>
+        </form>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            className="form-control"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit" className="btn-submit">
-          {isLogin ? "Login" : "Sign Up"}
-        </button>
-
-        {/* Toggle link */}
-        <p className="toggle-auth">
-          {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-          <span onClick={toggleAuthMode} className="toggle-link">
-            {isLogin ? "Sign Up" : "Login"}
-          </span>
-        </p>
-      </form>
     </div>
-  );
+);
 };
 
 export default AuthForm;
