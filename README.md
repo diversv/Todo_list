@@ -31,4 +31,4 @@ If you have any questions, feel free to reach out:
 
 Email: svetafl627@example.com <br>
 LinkedIn: https://linkedin.com/in/lanavershinin <br>
-Live Demo: lanatodoapp.com <br>
+Live Demo: https://www.lanatodoapp.com <br>
