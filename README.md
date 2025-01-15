@@ -30,5 +30,5 @@ You can use the following user credentials to test the app:
 If you have any questions, feel free to reach out:
 
 Email: svetafl627@example.com <br>
-LinkedIn: Your LinkedIn Profile <br>
+LinkedIn: https://linkedin.com/in/lanavershinin <br>
 Live Demo: lanatodoapp.com <br>
